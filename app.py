@@ -45,7 +45,7 @@ if __name__ == '__main__':
     # Routes
     @app.route('/')
     def index():
-        return render_template('index.html')
+        return render_template('templates/index.html')
 
     @app.route('/predict_emotion', methods=['POST'])
     def predict_emotion():
