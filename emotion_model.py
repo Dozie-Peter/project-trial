@@ -5,13 +5,13 @@ import joblib as jb
 from flask_sqlalchemy import SQLAlchemy
 import os
 
-# Use the same SQLite database for storing the model
-db = SQLAlchemy()
-
 class EmotionModel:
     def __init__(self):
         self.vectorizer = TfidfVectorizer()
         self.model = SVC(kernel='linear')
+        # Initialize the database for the emotion model
+        # with db.app.app_context():
+        #     db.create_all()
 
     def train(self, X, y):
         X_tfidf = self.vectorizer.fit_transform(X)
@@ -27,11 +27,3 @@ class EmotionModel:
 
     def load_model(self, filename='emotion_model.pkl'):
         self.vectorizer, self.model = jb.load(filename)
-
-# Initialize the database for the emotion model
-with db.app.app_context():
-    db.create_all()
-class Message(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    content = db.Column(db.String(200), nullable=False)
-    sender = db.Column(db.String(50), nullable=False)
