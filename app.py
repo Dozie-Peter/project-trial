@@ -39,13 +39,10 @@ if __name__ == '__main__':
     # Save the trained model
     emotion_model.save_model()
 
-    # Run the Flask app
-    app.run(debug=True)
-
     # Routes
     @app.route('/')
     def index():
-        return render_template('templates/index.html')
+        return render_template('index.html')
 
     @app.route('/predict_emotion', methods=['POST'])
     def predict_emotion():
@@ -65,3 +62,6 @@ if __name__ == '__main__':
         db.session.commit()
 
         return jsonify({'emotion': prediction, 'response': bot_response})
+    
+    # Run the Flask app
+    app.run(debug=True)
