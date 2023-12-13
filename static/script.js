@@ -20,15 +20,23 @@ $(document).ready(function() {
         });
     }
 
+    var chatbotButton = document.getElementById("chatbot-send-btn");
+    chatbotButton.onclick = handleUserInput;
+    var chatbotInput = document.getElementById("chatbot-input");
+
     // Override handleUserInput function to send input to server
     function handleUserInput() {
-        var userInput = chatbotInput.val().trim();
+        var userInput = chatbotInput.value.trim();
+        console.log(userInput)
         if (userInput !== '') {
             displayMessage("You: " + userInput, 'user');
             sendUserInputToServer(userInput);
-            chatbotInput.val('');
+            chatbotInput.value('');
         }
     }
+    
+
+    
 
     // ... (remaining JavaScript code)
 });
